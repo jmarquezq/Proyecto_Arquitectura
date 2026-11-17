@@ -1,0 +1,112 @@
+/* ==========================================================================
+   ALU Simulator Pro — SVG Data-Flow & Hardware Signal Animations
+   Only animates compositor/stroke properties tied directly to simulator state
+   ========================================================================== */
+
+.svg-node-box {
+  fill: #0f172a;
+  stroke: rgba(148, 163, 184, 0.35);
+  stroke-width: 1.5;
+  transition: stroke 200ms ease, fill 200ms ease;
+  cursor: pointer;
+}
+
+.svg-node-box:hover {
+  stroke: #38bdf8;
+}
+
+.svg-node-group.is-active .svg-node-box {
+  fill: #132242;
+  stroke: #22d3ee;
+  stroke-width: 2.2;
+}
+
+.svg-node-group.is-selected .svg-node-box {
+  stroke: #a78bfa;
+  stroke-width: 2.4;
+}
+
+.svg-node-group.is-dimmed {
+  opacity: 0.45;
+}
+
+.svg-node-group.is-error .svg-node-box {
+  fill: #271521;
+  stroke: #f59e0b;
+  stroke-width: 2.2;
+}
+
+.svg-wire {
+  fill: none;
+  stroke: rgba(100, 116, 139, 0.38);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 200ms ease, stroke-width 200ms ease, opacity 200ms ease;
+}
+
+.svg-wire.is-energized {
+  stroke: #22d3ee;
+  stroke-width: 3;
+}
+
+.svg-wire.is-control-energized {
+  stroke: #a78bfa;
+  stroke-width: 2.8;
+}
+
+.svg-wire.is-flow-moving {
+  stroke-dasharray: 8 6;
+  animation: wirePulseFlow 0.85s linear infinite;
+}
+
+.svg-wire.is-warn-energized {
+  stroke: #f59e0b;
+  stroke-width: 2.8;
+}
+
+.svg-label-title {
+  fill: #f1f5f9;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.svg-label-sub {
+  fill: #94a3b8;
+  font-family: var(--font-sans);
+  font-size: 11px;
+}
+
+.svg-label-value {
+  fill: #22d3ee;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.svg-label-violet {
+  fill: #c4b5fd;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+@keyframes wirePulseFlow {
+  from {
+    stroke-dashoffset: 28;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .svg-wire.is-flow-moving {
+    animation: none;
+    stroke-dasharray: none;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
